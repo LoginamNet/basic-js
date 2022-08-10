@@ -26,7 +26,7 @@ const { NotImplementedError } = require('../extensions/index.js');
     options.separator = `+`;
   }
 
-  if (!options.addition) {
+  if (!options.addition && !(typeof options.addition === 'boolean') && !(options.addition === null)) {
     options.addition = "";
 		options.additionRepeatTimes = 0;
 		options.additionSeparator = "";
@@ -50,6 +50,8 @@ const { NotImplementedError } = require('../extensions/index.js');
     if (!options.additionRepeatTimes) {  
       options.additionSeparator = ""; 
     }
+
+  
 
     additional += options.addition + options.additionSeparator;
     console.log(additional);
