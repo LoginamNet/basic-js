@@ -17,12 +17,16 @@ const chainMaker = {
     // remove line with error and write your code here
   },
   removeLink(position) {
-    if (!(position instanceof Number) || position < 1 || position > this.chain.length - 1) {
+    if (position <= 0 || !Number.isInteger(position) || position > this.chain.length - 1) {
 
       this.chain = [];
       throw new Error(`You can't remove incorrect link!`);
 
-    }
+    } 
+  
+    this.chain.splice(position - 1, 1);
+    return this;
+
     // remove line with error and write your code here
   },
   reverseChain() {
