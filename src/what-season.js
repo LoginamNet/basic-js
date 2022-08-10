@@ -14,15 +14,16 @@ const { NotImplementedError } = require('../extensions/index.js');
 function getSeason(date) {
   let season;
 
-  function noDate(message) {
-    this.message = `'Invalid date!'`;
-    this.name = noDate;
-  }
+  if (!arguments.length) {
+    
+    return 'Unable to determine the time of year!';
+  
+  } else if (Object.getOwnPropertyNames(date).length > 0 || !(date instanceof Date) ) {
 
-  if (!arguments.length) {return 'Unable to determine the time of year!'}
+      throw new Error('Invalid date!');
 
-  if (Date.parse(date) === NaN) {throw new noDate('Invalid date!')}
-
+  } else {
+    
   let month = date.getMonth();
 
   if (month < 2 || month  === 11) {
@@ -36,6 +37,8 @@ function getSeason(date) {
   }
 
   return season;
+
+  }
   // remove line with error and write your code here
 }
 
