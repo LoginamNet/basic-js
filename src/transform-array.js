@@ -16,25 +16,30 @@ const { NotImplementedError } = require('../extensions/index.js');
 function transform(arr) {
   let result = [];
 
-
-  if (!(arr instanceof Array)) {
-    return new Error("'arr' parameter must be an instance of the Array!");
-  }
-
+  if (!(arr instanceof Array)) throw new Error("'arr' parameter must be an instance of the Array!");
+  
   for (let i = 0; i < arr.length; i++) {
-
-    if (arr[i] === '--double-prev') {
-      result.push(arr[i - 1]);
-    } else if (arr[i] === '--double-next') {
+    
+    if (arr[i] === '--discard-prev' && arr[i - 2] !== '--discard-next') {
+      result.pop();
+    } else if (arr[i] === '--discard-next') {
+      i++;
+    } else if (arr[i] === `--double-next`) {
+      result.push(arr[i + 1]);
+    } else if (arr[i] === `--double-prev` && arr[i - 2] === '--discard-next' && i > 1) {
+      continue;
+    } else if (arr[i] === `--double-prev`) {
       result.push(arr[i - 1]);
     } else {
-      result.push(arr[i]);
+      result.push(arr[i])
     }
-
+    
   }
+ 
+  let final = result.filter(item => typeof item !== `undefined`).filter(item => item !== "--discard-prev");
 
 
-  return result;
+  return final;
   // remove line with error and write your code here
 }
 
