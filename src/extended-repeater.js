@@ -15,9 +15,61 @@ const { NotImplementedError } = require('../extensions/index.js');
  * => 'STRINGPLUS00PLUS00PLUS**STRINGPLUS00PLUS00PLUS**STRINGPLUS00PLUS00PLUS'
  *
  */
-function repeater(/* str, options */) {
-  throw new NotImplementedError('Not implemented');
-  // remove line with error and write your code here
+ function repeater(str, options) {
+  let result = '';
+  
+  if  (!options.repeatTimes) {
+    options.repeatTimes = 1;
+  }
+
+  if  (!options.separator) {
+    options.separator = `+`;
+  }
+
+  if (!options.addition) {
+    options.addition = "";
+		options.additionRepeatTimes = 0;
+		options.additionSeparator = "";
+  }
+  
+  if (!options.additionSeparator) {
+    options.additionSeparator = '|';
+  }
+
+  if (!options.additionRepeatTimes) {
+    options.additionRepeatTimes = 1;
+    options.additionSeparator = '';
+  }
+
+  let additional = '';
+  
+  while (options.additionRepeatTimes) {
+
+    options.additionRepeatTimes--;
+
+    if (!options.additionRepeatTimes) {  
+      options.additionSeparator = ""; 
+    }
+
+    additional += options.addition + options.additionSeparator;
+    console.log(additional);
+
+  }
+
+  while (options.repeatTimes) {
+
+		options.repeatTimes--;
+
+		if (!options.repeatTimes) {  
+      options.separator = ""; 
+    }
+
+		result += str + additional + options.separator;
+    console.log(result);
+
+	}
+
+  return result;
 }
 
 module.exports = {
