@@ -14,7 +14,7 @@ const { NotImplementedError } = require('../extensions/index.js');
 function sortByHeight(arr) {
   let noOnesArr = [...arr].sort((a, b) => a - b).filter(item => item != -1)
 
-  return arr.map(num => {return (num === -1) ? - 1 : +noOnesArr.splice(0, 1).join('')});
+  return arr.map(num => {return (num === -1) ? - 1 : +noOnesArr.splice(0, 1)});
   // remove line with error and write your code here
 }
 
